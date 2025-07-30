@@ -6,7 +6,8 @@ spec:
   # use esse comando para ver as classes: kubectl get ingressclass
   # ingressClassName: nginx-example
   rules:
-  - http:
+  - host: "python-app.test.com"
+    http:
       paths:
       - path: /
         pathType: Prefix

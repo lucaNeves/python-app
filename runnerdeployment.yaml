@@ -1,0 +1,12 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: self-hosted-runners
+spec:
+  replicas: 1
+  template:
+    spec:
+      repository: lucaNeves/python-app
+
+# Rodar o comando abaixo para criar o runner no cluster
+# kubectl apply -n actions-runner-system -f runnerdeployment.yaml

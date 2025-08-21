@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: luizvepi/python-app
   pullPolicy: IfNotPresent
-  tag: 61e2fd
+  tag: 0806df
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""

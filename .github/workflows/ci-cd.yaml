@@ -28,10 +28,27 @@ jobs:
         with:
           push: true
           tags: luizvepi/python-app:${{ env.sha_short }}
+    outputs:
+      commit_id: ${{ env.sha_short }}
+  
   cd:
     runs-on: self-hosted
     needs: ci
     steps:
+      -
+        uses: actions/checkout@v3
+      -
+        name: Modify file in chart/python-app/values
+        shell: bash
+        run: |
+          echo ${{ needs.ci.outputs.commit_id }}
+          pip install yq
+          yq -Yi 'image.tag = "${{ needs.ci.outputs.commit_id }}"' charts/python-app/values.yaml
+      -
+        name: Commit changes
+        uses: EndBug/add-and-commit@v10
+        with:
+          message: "Update values.yaml with commit ${{ needs.ci.outputs.commit_id }}"
       -
         name: Install ArgoCD CLI
         shell: bash
